@@ -66,7 +66,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Create Notification database and Notification repository struct skeleton.`
     -   [x] Commit: `Implement add function in Notification repository.`
     -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
     -   [x] Commit: `Create Notification service struct skeleton.`
     -   [x] Commit: `Implement subscribe function in Notification service.`
@@ -77,7 +77,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement receive function in Notification controller.`
     -   [x] Commit: `Implement list_messages function in Notification service.`
     -   [x] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [x] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -86,4 +86,8 @@ This is the place for you to write reflections:
 
 #### Reflection Subscriber-1
 
+We chose to use a Read Write Lock instead of a MUTEX in this case because Rwlock is designed to support simultaneous reading by multiple threads, whereas a mutex only allows one thread to access a variable at a time. Therefore, in this scenario, Rwlock is more suitable because the Notifications vector will be accessed simultaneously by multiple threads without any writing. If we were to use a mutex, it would hinder simultaneous access by multiple threads. lazy_static is used to make a variable a singleton, meaning there is only one instance of that variable in the program. Additionally, static variables in Rust are made immutable by Rust, unlike in Java where their values can be changed, thus ensuring thread safety during multi-threading.
+
 #### Reflection Subscriber-2
+
+lib.rs contains information required by components in other applications. This includes error responses, root URLs, and singleton app configurations. With the existing code design, adding a new type of observer will be easier because the program supports the open-close principle. In the case of having more than one main application, it can still be done by registering subscribers to different applications through the appropriate APIs. It's very useful to have testing or Postman collections. They help verify the correctness of the program, including whether the program sends responses and operates as expected using real data from the application.
